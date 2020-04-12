@@ -88,6 +88,7 @@ int FileManager::writeFile(string fileName, vector<ElectricalDevices*>& vec)
 		{
 			fout << MONITOR << " ";
 			Monitor* monitor = dynamic_cast<Monitor*>(vec[i]);
+			fout << *monitor;
 		}
 			break;
 
@@ -95,6 +96,7 @@ int FileManager::writeFile(string fileName, vector<ElectricalDevices*>& vec)
 		{
 			fout << KEYBOARD << " ";
 			Keyboard* keyboard = dynamic_cast<Keyboard*>(vec[i]);
+			fout << *keyboard;
 		}
 			break;
 

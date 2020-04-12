@@ -120,6 +120,7 @@
     <ClCompile Include="DepartmentManager.cpp" />
     <ClCompile Include="ElectricalDevices.cpp" />
     <ClCompile Include="ExpShop.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Fridge.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Iron.cpp" />
@@ -149,6 +150,10 @@
     <ClInclude Include="Shop.h" />
     <ClInclude Include="ShopManager.h" />
     <ClInclude Include="ValidValue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="compDep.txt" />
+    <Text Include="houseDep.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
