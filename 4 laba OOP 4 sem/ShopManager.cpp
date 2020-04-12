@@ -340,20 +340,41 @@ void ShopManager::editGood(Shop & shop)
 void ShopManager::findGood(Shop & shop)
 {
 	string findStr;
-	cout << "Поиск: "; getline(cin, findStr);
+	cout << "Поиск (параметры поиска: товар, производитель, цена): "; getline(cin, findStr);
 	cout << endl;
 	
-	vector<ElectricalDevices>* vecComp = DepartmentManager::findGood(findStr, shop.getComputerDep());
-	vector<ElectricalDevices>* vecHouse = DepartmentManager::findGood(findStr, shop.getHouseholdDep());
+	vector<ElectricalDevices*>* vecComp = DepartmentManager::findGood(findStr, shop.getComputerDep());
+	vector<ElectricalDevices*>* vecHouse = DepartmentManager::findGood(findStr, shop.getHouseholdDep());
 
 	cout << "~~~" << shop.getComputerDep().getName() << "~~~" << endl;
 	if (vecComp->size())
 	{
 		for (size_t i = 0; i < vecComp->size(); i++)
 		{
-			cout << fixed << setprecision(2) << left <<
-				i + 1 << ". " << setw(15) << vecComp->at(i).getName() << " | " << setw(15) << vecComp->at(i).getManufacturer()
-				<< " | " << vecComp->at(i).getCost() << "$" << endl;
+			cout << "#" << i + 1 << endl;
+			cout << "Товар: " << vecComp->at(i)->getName() << endl;
+			cout << "Производитель: " << vecComp->at(i)->getManufacturer() << endl;
+			cout << fixed << setprecision(2) << "Цена: " << vecComp->at(i)->getCost() << "$" << endl;
+
+			switch (vecComp->at(i)->getTypeGood())
+			{
+			case MONITOR:
+			{
+				cout << fixed << setprecision(2) << "Ширина монитора: " << ((Monitor*)vecComp->at(i))->getWidth() << endl;
+				cout << fixed << setprecision(2) << "Высота монитора: " << ((Monitor*)vecComp->at(i))->getHeight() << endl;
+			}
+			break;
+
+			case KEYBOARD:
+			{
+				cout << "Количество клавиш на клавиатуре: " << ((Keyboard*)vecComp->at(i))->getCountKey() << endl;
+			}
+			break;
+
+			default:
+				break;
+			}
+			cout << endl;
 		}
 	}
 	else
@@ -367,9 +388,30 @@ void ShopManager::findGood(Shop & shop)
 	{
 		for (size_t i = 0; i < vecHouse->size(); i++)
 		{
-			cout << fixed << setprecision(2) << left <<
-				i + 1 << ". " << setw(15) << vecHouse->at(i).getName() << " | " << setw(15) << vecHouse->at(i).getManufacturer()
-				<< " | " << vecHouse->at(i).getCost() << "$" << endl;
+			cout << "#" << i + 1 << endl;
+			cout << "Товар: " << vecHouse->at(i)->getName() << endl;
+			cout << "Производитель: " << vecHouse->at(i)->getManufacturer() << endl;
+			cout << fixed << setprecision(2) << "Цена: " << vecHouse->at(i)->getCost() << "$" << endl;
+
+			switch (vecHouse->at(i)->getTypeGood())
+			{
+			case FRIDGE:
+			{
+				cout << "Функция \"not frost\": " << (((Fridge*)vecHouse->at(i))->getIsNotFrost() ? "есть" : "нет") << endl;
+				cout << fixed << setprecision(2) << "Минимальная температура: " << ((Fridge*)vecHouse->at(i))->getMinTemp() << "°C" << endl;
+			}
+			break;
+
+			case IRON:
+			{
+				cout << fixed << setprecision(2) << "Максимальная температура: " << ((Iron*)vecHouse->at(i))->getMaxTemp() << "°C" << endl;
+			}
+			break;
+
+			default:
+				break;
+			}
+			cout << endl;
 		}
 	}
 	else
@@ -569,6 +611,9 @@ void ShopManager::placeOrder(ClientData *&clientData, Order &order, Shop & shop)
 					cout << "Общая сумма: " << order.getTotalSum() << "$" << endl;
 					system("pause>>void");
 					system("cls");
+					order.~Order();
+					shop.~Shop();
+					delete clientData;
 					exit(0);
 				}
 				else

@@ -15,9 +15,43 @@ int DepartmentManager::showGoods(Department & obj)
 	cout << "~~~" << obj.getName() << "~~~" << endl;
 	for (size_t i = 0; i < obj.getGoods().size(); i++)
 	{
-		cout << fixed << setprecision(2) << left << 
-			i + 1 << ". " << setw(15) << obj.getGoods()[i]->getName() << " | " << setw(15) << obj.getGoods()[i]->getManufacturer()
-			<< " | " << obj.getGoods()[i]->getCost() << "$" << endl;
+		cout << "#" << i + 1 << endl;
+		cout << "Товар: " << obj.getGoods()[i]->getName() << endl;
+		cout << "Производитель: " << obj.getGoods()[i]->getManufacturer() << endl;
+		cout << fixed << setprecision(2) << "Цена: " << obj.getGoods()[i]->getCost() << "$" << endl;
+
+		switch (obj.getGoods()[i]->getTypeGood())
+		{
+		case FRIDGE:
+		{
+			cout << "Функция \"not frost\": " << (((Fridge*)obj.getGoods()[i])->getIsNotFrost() ? "есть" : "нет") << endl;
+			cout << fixed << setprecision(2) << "Минимальная температура: " << ((Fridge*)obj.getGoods()[i])->getMinTemp() << "°C" << endl;
+		}
+			break;
+
+		case IRON:
+		{
+			cout << fixed << setprecision(2) << "Максимальная температура: " << ((Iron*)obj.getGoods()[i])->getMaxTemp() << "°C" << endl;
+		}
+			break;
+
+		case MONITOR:
+		{
+			cout << fixed << setprecision(2) << "Ширина монитора: " << ((Monitor*)obj.getGoods()[i])->getWidth() << endl;
+			cout << fixed << setprecision(2) << "Высота монитора: " << ((Monitor*)obj.getGoods()[i])->getHeight() << endl;
+		}
+			break;
+
+		case KEYBOARD:
+		{
+			cout << "Количество клавиш на клавиатуре: " << ((Keyboard*)obj.getGoods()[i])->getCountKey() << endl;
+		}
+			break;
+
+		default:
+			break;
+		}
+		cout << endl;
 	}
 	return 1;
 }
@@ -47,9 +81,9 @@ void DepartmentManager::editGood(int index, int fieldIndex, Department & obj)
 	}
 }
 
-vector<ElectricalDevices>* DepartmentManager::findGood(string findText, Department & obj)
+vector<ElectricalDevices*>* DepartmentManager::findGood(string findText, Department & obj)
 {
-	vector<ElectricalDevices>* vec = new vector<ElectricalDevices>;
+	vector<ElectricalDevices*>* vec = new vector<ElectricalDevices*>;
 	regex find(UpperCase(findText));
 
 	for (size_t i = 0; i < obj.getGoods().size(); i++)
@@ -58,7 +92,7 @@ vector<ElectricalDevices>* DepartmentManager::findGood(string findText, Departme
 			regex_search(UpperCase(obj.getGoods()[i]->getManufacturer()), find) ||
 			regex_search(to_string(obj.getGoods()[i]->getCost()), find))
 		{
-			vec->push_back(*obj.getGoods()[i]);
+			vec->push_back(obj.getGoods()[i]);
 		}
 	}
 	return vec;

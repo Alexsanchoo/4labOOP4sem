@@ -3,6 +3,10 @@
 #include <iomanip>
 #include "ElectricalDevices.h"
 #include "Order.h"
+#include "Iron.h"
+#include "Fridge.h"
+#include "Keyboard.h"
+#include "Monitor.h"
 
 using namespace std;
 
