@@ -63,7 +63,7 @@ inline string ValidValue<string>::getString()
 	while (!isValid)
 	{
 		getline(cin, validStr);
-		isValid = regex_match(validStr, regex("[À-ßà-ÿA-Za-z¨¸\\-\\ \\_]+"));
+		isValid = regex_match(validStr, regex("[À-ßà-ÿA-Za-z¨¸\\-\\_]+"));
 		if (!isValid)
 		{
 			cout << "Îøèáêà! Ââåäèòå åù¸ ðàç: ";

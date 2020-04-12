@@ -24,6 +24,10 @@ void ShopManager::addGood(Shop &shop)
 			device->setManufacturer(ValidValue<string>::getString());
 			cout << "Введите цену товара: ";
 			device->setCost(ValidValue<double>::getValue());
+			cout << "Введите ширину монитора: ";
+			((Monitor*)device)->setWidth(ValidValue<double>::getValue());
+			cout << "Введите высоту экрана: ";
+			((Monitor*)device)->setHeight(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getComputerDep());
 			cout << "Монитор успешно добавлен в ассортимент!" << endl << endl;
 			break;
@@ -34,6 +38,8 @@ void ShopManager::addGood(Shop &shop)
 			device->setManufacturer(ValidValue<string>::getString());
 			cout << "Введите цену товара: ";
 			device->setCost(ValidValue<double>::getValue());
+			cout << "Введите количество клавиш: ";
+			((Keyboard*)device)->setCountKey(ValidValue<>::getValue());
 			DepartmentManager::addGood(device, shop.getComputerDep());
 			cout << "Клавиатура успешно добавлена в ассортимент!" << endl << endl;
 			break;
@@ -44,6 +50,10 @@ void ShopManager::addGood(Shop &shop)
 			device->setManufacturer(ValidValue<string>::getString());
 			cout << "Введите цену товара: ";
 			device->setCost(ValidValue<double>::getValue());
+			cout << "Холодильник требует разморозки? ( 1 - да, 0 - нет): ";
+			((Fridge*)device)->setIsNotFrost(ValidValue<bool>::getValue());
+			cout << "Введите минимальную температуру холодильника: ";
+			((Fridge*)device)->setMinTemp(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getHouseholdDep());
 			cout << "Холодильник успешно добавлен в ассортимент!" << endl << endl;
 			break;
@@ -54,6 +64,8 @@ void ShopManager::addGood(Shop &shop)
 			device->setManufacturer(ValidValue<string>::getString());
 			cout << "Введите цену товара: ";
 			device->setCost(ValidValue<double>::getValue());
+			cout << "Введите максимальную температуру утюга: ";
+			((Iron*)device)->setMaxTemp(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getHouseholdDep());
 			cout << "Утюг успешно добавлен в ассортимент!" << endl << endl;
 			break;

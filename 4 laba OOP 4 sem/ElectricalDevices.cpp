@@ -1,4 +1,8 @@
 #include "ElectricalDevices.h"
+#include "Fridge.h"
+#include "Iron.h"
+#include "Monitor.h"
+#include "Keyboard.h"
 
 void ElectricalDevices::setName(string name)
 {
@@ -10,7 +14,7 @@ void ElectricalDevices::setCost(double cost)
 	this->cost = cost;
 }
 
-void ElectricalDevices::setType(TypeGood type)
+void ElectricalDevices::setType(TypeDep type)
 {
 	this->type = type;
 }
@@ -30,13 +34,33 @@ double ElectricalDevices::getCost()
 	return cost;
 }
 
-TypeGood ElectricalDevices::getType()
+TypeDep ElectricalDevices::getType()
 {
 	return type;
+}
+
+TypeGood ElectricalDevices::getTypeGood()
+{
+	if (typeid(*this) == typeid(Fridge))
+	{
+		return TypeGood::FRIDGE;
+	} 
+	else if (typeid(*this) == typeid(Iron))
+	{
+		return TypeGood::IRON;
+	}
+	else if (typeid(*this) == typeid(Monitor))
+	{
+		return TypeGood::MONITOR;
+	}
+	else if (typeid(*this) == typeid(Keyboard))
+	{
+		return TypeGood::KEYBOARD;
+	}
+	
 }
 
 string ElectricalDevices::getManufacturer()
 {
 	return manufacturer;
 }
-
