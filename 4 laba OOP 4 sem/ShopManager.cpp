@@ -20,24 +20,40 @@ void ShopManager::addGood(Shop &shop)
 		{
 		case 1:
 			device = new Monitor();
+			cout << "Введите название производителя: ";
+			device->setManufacturer(ValidValue<string>::getString());
+			cout << "Введите цену товара: ";
+			device->setCost(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getComputerDep());
 			cout << "Монитор успешно добавлен в ассортимент!" << endl << endl;
 			break;
 
 		case 2:
 			device = new Keyboard();
+			cout << "Введите название производителя: ";
+			device->setManufacturer(ValidValue<string>::getString());
+			cout << "Введите цену товара: ";
+			device->setCost(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getComputerDep());
 			cout << "Клавиатура успешно добавлена в ассортимент!" << endl << endl;
 			break;
 
 		case 3:
 			device = new Fridge();
+			cout << "Введите название производителя: ";
+			device->setManufacturer(ValidValue<string>::getString());
+			cout << "Введите цену товара: ";
+			device->setCost(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getHouseholdDep());
 			cout << "Холодильник успешно добавлен в ассортимент!" << endl << endl;
 			break;
 
 		case 4:
 			device = new Iron();
+			cout << "Введите название производителя: ";
+			device->setManufacturer(ValidValue<string>::getString());
+			cout << "Введите цену товара: ";
+			device->setCost(ValidValue<double>::getValue());
 			DepartmentManager::addGood(device, shop.getHouseholdDep());
 			cout << "Утюг успешно добавлен в ассортимент!" << endl << endl;
 			break;
