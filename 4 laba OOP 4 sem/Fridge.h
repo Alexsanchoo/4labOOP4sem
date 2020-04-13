@@ -1,5 +1,6 @@
 #pragma once
 #include "ElectricalDevices.h"
+
 class Fridge :
 	public ElectricalDevices
 {
